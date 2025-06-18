@@ -1,3 +1,4 @@
+```mermaid
 graph TB
     CLIENT[Cliente/CI] --> API[NestJS API]
     API --> QUEUE[RabbitMQ]
@@ -11,3 +12,4 @@ graph TB
         WORKER --> DEDUP[Deduplicação]
         WORKER --> CLEAN[Limpeza Auto]
     end
+```

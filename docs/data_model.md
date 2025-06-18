@@ -1,3 +1,4 @@
+```mermaid
 erDiagram
     PROJECT {
         uuid id PK
@@ -89,3 +90,4 @@ erDiagram
     
     INDENTATION_ANALYSIS ||--o{ INDENTATION_FILE : "has many"
     INDENTATION_FILE ||--o{ INDENT_DISTRIBUTION : "has many"
+```
