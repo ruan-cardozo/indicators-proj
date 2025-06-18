@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Script corrigido para criar issues automaticamente no GitHub
-# Uso: ./create-issues-fixed.sh
-
 set -e
 
 # Cores para output

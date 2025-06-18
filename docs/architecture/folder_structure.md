@@ -620,5 +620,3 @@ nest g controller modules/metrics/controllers/metrics --flat
 nest g service modules/metrics/services/metrics --flat
 nest g service modules/metrics/services/deduplication --flat
 ```
-
-Esta estrutura **impressiona na apresentação** e **facilita o desenvolvimento**! 🎯
