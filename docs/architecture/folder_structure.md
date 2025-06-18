@@ -11,38 +11,14 @@ indicators-proj/
 │   │   └── deduplication-strategy.md # Estratégia de deduplicação
 │   ├── api/
 │   │   ├── endpoints.md              # Documentação dos endpoints
-│   │   └── examples.md               # Exemplos de uso
-│   └── deployment/
-│       └── setup-guide.md            # Guia de instalação
 │
-├── 🐳 docker/                        # Configurações Docker
-│   ├── Dockerfile                    # Build da aplicação
-│   ├── docker-compose.yml           # Orquestração dos serviços
+├── 🐳 docker/                      # Configurações Docker
+│   ├── Dockerfile.frontend          # Build da aplicação frontend
+│   ├── Dockerfile.backend           # Build da aplicação backend
+│   ├── docker-compose.yml           # Orquestração dos serviços 
 │   └── .env.example                 # Variáveis de ambiente
 │
-├── 💾 database/                      # Scripts de banco
-│   ├── migrations/                   # Migrações TypeORM
-│   │   ├── 1698000001-CreateProjects.ts
-│   │   ├── 1698000002-CreateMetrics.ts
-│   │   └── 1698000003-CreateMetricHashes.ts
-│   ├── seeds/                        # Dados iniciais
-│   │   └── initial-data.seed.ts
-│   └── data-source.ts               # Configuração TypeORM
-│
-├── 🧪 test/                          # Testes de integração e E2E
-│   ├── integration/                  # Testes de integração
-│   │   ├── api/
-│   │   │   ├── metrics.integration.spec.ts
-│   │   │   └── projects.integration.spec.ts
-│   │   └── database/
-│   │       └── repository.integration.spec.ts
-│   ├── e2e/                         # Testes end-to-end
-│   │   └── full-flow.e2e.spec.ts
-│   └── fixtures/                    # Dados de teste
-│       ├── sample-metrics.json
-│       └── test-projects.json
-│
-├── 🌐 web-dashboard/                 # Projeto React separado
+├── 🌐 frontend/                 # Projeto React separado
 │   ├── public/
 │   │   ├── index.html
 │   │   └── favicon.ico
@@ -72,145 +48,181 @@ indicators-proj/
 │   ├── tsconfig.json
 │   └── vite.config.ts
 │
-├── 🚀 src/                          # Código fonte da API
-│   ├── 🔧 config/                   # Configurações
-│   │   ├── database.config.ts
-│   │   ├── queue.config.ts
-│   │   └── app.config.ts
+├── 🔧 backend/                       # Projeto NestJS
+│   ├── 💾 database/                  # Scripts de banco
+│   │   ├── migrations/               # Migrações TypeORM
+│   │   │   ├── 1698000001-CreateProjects.ts
+│   │   │   ├── 1698000002-CreateMetrics.ts
+│   │   │   ├── 1698000003-CreateDependencies.ts
+│   │   │   ├── 1698000004-CreateIndentationAnalysis.ts
+│   │   │   └── 1698000005-CreateMetricHashes.ts
+│   │   ├── seeds/                    # Dados iniciais
+│   │   │   ├── initial-data.seed.ts
+│   │   │   └── run-seeds.ts
+│   │   └── data-source.ts           # Configuração TypeORM
 │   │
-│   ├── 🧩 common/                   # Código compartilhado
-│   │   ├── decorators/
-│   │   │   └── api-response.decorator.ts
-│   │   ├── filters/
-│   │   │   └── http-exception.filter.ts
-│   │   ├── interceptors/
-│   │   │   └── logging.interceptor.ts
-│   │   ├── pipes/
-│   │   │   └── validation.pipe.ts
-│   │   └── utils/
-│   │       ├── hash.util.ts
-│   │       └── date.util.ts
+│   ├── 🧪 test/                      # Testes do backend
+│   │   ├── integration/              # Testes de integração
+│   │   │   ├── api/
+│   │   │   │   ├── metrics.integration.spec.ts
+│   │   │   │   ├── projects.integration.spec.ts
+│   │   │   │   └── dashboard.integration.spec.ts
+│   │   │   └── database/
+│   │   │       ├── repository.integration.spec.ts
+│   │   │       └── migration.integration.spec.ts
+│   │   ├── e2e/                     # Testes end-to-end
+│   │   │   ├── full-flow.e2e.spec.ts
+│   │   │   └── deduplication.e2e.spec.ts
+│   │   └── fixtures/                # Dados de teste
+│   │       ├── sample-metrics.json
+│   │       ├── test-projects.json
+│   │       └── mock-dependencies.json
 │   │
-│   ├── 🏢 modules/                  # Módulos de domínio
-│   │   ├── 📊 metrics/              # Módulo de métricas
-│   │   │   ├── controllers/
-│   │   │   │   ├── metrics.controller.ts
-│   │   │   │   └── metrics.controller.spec.ts
-│   │   │   ├── services/
-│   │   │   │   ├── metrics.service.ts
-│   │   │   │   ├── metrics.service.spec.ts
-│   │   │   │   ├── deduplication.service.ts
-│   │   │   │   └── deduplication.service.spec.ts
-│   │   │   ├── repositories/
-│   │   │   │   ├── metrics.repository.ts
-│   │   │   │   ├── metrics.repository.spec.ts
-│   │   │   │   ├── metric-hash.repository.ts
-│   │   │   │   └── metric-hash.repository.spec.ts
-│   │   │   ├── dto/
-│   │   │   │   ├── submit-metrics.dto.ts
-│   │   │   │   ├── query-metrics.dto.ts
-│   │   │   │   └── metrics-response.dto.ts
-│   │   │   ├── entities/
-│   │   │   │   ├── metric.entity.ts
-│   │   │   │   ├── metric-hash.entity.ts
-│   │   │   │   ├── dependency.entity.ts
-│   │   │   │   ├── dependency-item.entity.ts
-│   │   │   │   ├── indentation-analysis.entity.ts
-│   │   │   │   ├── indentation-file.entity.ts
-│   │   │   │   └── indent-distribution.entity.ts
-│   │   │   ├── processors/
-│   │   │   │   ├── metrics.processor.ts
-│   │   │   │   └── metrics.processor.spec.ts
-│   │   │   └── metrics.module.ts
+│   ├── 🚀 src/                      # Código fonte da API
+│   │   ├── 🔧 config/               # Configurações
+│   │   │   ├── database.config.ts
+│   │   │   ├── queue.config.ts
+│   │   │   └── app.config.ts
 │   │   │
-│   │   ├── 📁 projects/             # Módulo de projetos
-│   │   │   ├── controllers/
-│   │   │   │   ├── projects.controller.ts
-│   │   │   │   └── projects.controller.spec.ts
-│   │   │   ├── services/
-│   │   │   │   ├── projects.service.ts
-│   │   │   │   └── projects.service.spec.ts
-│   │   │   ├── repositories/
-│   │   │   │   ├── projects.repository.ts
-│   │   │   │   └── projects.repository.spec.ts
-│   │   │   ├── dto/
-│   │   │   │   ├── create-project.dto.ts
-│   │   │   │   └── project-response.dto.ts
-│   │   │   ├── entities/
-│   │   │   │   └── project.entity.ts
-│   │   │   └── projects.module.ts
+│   │   ├── 🧩 common/               # Código compartilhado
+│   │   │   ├── decorators/
+│   │   │   │   └── api-response.decorator.ts
+│   │   │   ├── filters/
+│   │   │   │   └── http-exception.filter.ts
+│   │   │   ├── interceptors/
+│   │   │   │   └── logging.interceptor.ts
+│   │   │   ├── pipes/
+│   │   │   │   └── validation.pipe.ts
+│   │   │   └── utils/
+│   │   │       ├── hash.util.ts
+│   │   │       └── date.util.ts
 │   │   │
-│   │   ├── 🔄 queue/                # Módulo de filas
-│   │   │   ├── services/
-│   │   │   │   ├── queue.service.ts
-│   │   │   │   ├── queue.service.spec.ts
-│   │   │   │   ├── queue-health.service.ts
-│   │   │   │   └── queue-health.service.spec.ts
-│   │   │   ├── processors/
-│   │   │   │   ├── base.processor.ts
-│   │   │   │   └── base.processor.spec.ts
-│   │   │   └── queue.module.ts
+│   │   ├── 🏢 modules/              # Módulos de domínio
+│   │   │   ├── 📊 metrics/          # Módulo de métricas
+│   │   │   │   ├── controllers/
+│   │   │   │   │   ├── metrics.controller.ts
+│   │   │   │   │   └── metrics.controller.spec.ts
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── metrics.service.ts
+│   │   │   │   │   ├── metrics.service.spec.ts
+│   │   │   │   │   ├── deduplication.service.ts
+│   │   │   │   │   └── deduplication.service.spec.ts
+│   │   │   │   ├── repositories/
+│   │   │   │   │   ├── metrics.repository.ts
+│   │   │   │   │   ├── metrics.repository.spec.ts
+│   │   │   │   │   ├── metric-hash.repository.ts
+│   │   │   │   │   └── metric-hash.repository.spec.ts
+│   │   │   │   ├── dto/
+│   │   │   │   │   ├── submit-metrics.dto.ts
+│   │   │   │   │   ├── query-metrics.dto.ts
+│   │   │   │   │   └── metrics-response.dto.ts
+│   │   │   │   ├── entities/
+│   │   │   │   │   ├── metric.entity.ts
+│   │   │   │   │   ├── metric-hash.entity.ts
+│   │   │   │   │   ├── dependency.entity.ts
+│   │   │   │   │   ├── dependency-item.entity.ts
+│   │   │   │   │   ├── indentation-analysis.entity.ts
+│   │   │   │   │   ├── indentation-file.entity.ts
+│   │   │   │   │   └── indent-distribution.entity.ts
+│   │   │   │   ├── processors/
+│   │   │   │   │   ├── metrics.processor.ts
+│   │   │   │   │   └── metrics.processor.spec.ts
+│   │   │   │   └── metrics.module.ts
+│   │   │   │
+│   │   │   ├── 📁 projects/         # Módulo de projetos
+│   │   │   │   ├── controllers/
+│   │   │   │   │   ├── projects.controller.ts
+│   │   │   │   │   └── projects.controller.spec.ts
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── projects.service.ts
+│   │   │   │   │   └── projects.service.spec.ts
+│   │   │   │   ├── repositories/
+│   │   │   │   │   ├── projects.repository.ts
+│   │   │   │   │   └── projects.repository.spec.ts
+│   │   │   │   ├── dto/
+│   │   │   │   │   ├── create-project.dto.ts
+│   │   │   │   │   └── project-response.dto.ts
+│   │   │   │   ├── entities/
+│   │   │   │   │   └── project.entity.ts
+│   │   │   │   └── projects.module.ts
+│   │   │   │
+│   │   │   ├── 🔄 queue/            # Módulo de filas
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── queue.service.ts
+│   │   │   │   │   ├── queue.service.spec.ts
+│   │   │   │   │   ├── queue-health.service.ts
+│   │   │   │   │   └── queue-health.service.spec.ts
+│   │   │   │   ├── processors/
+│   │   │   │   │   ├── base.processor.ts
+│   │   │   │   │   └── base.processor.spec.ts
+│   │   │   │   └── queue.module.ts
+│   │   │   │
+│   │   │   ├── 🧹 cleanup/          # Módulo de limpeza
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── cleanup.service.ts
+│   │   │   │   │   └── cleanup.service.spec.ts
+│   │   │   │   ├── schedulers/
+│   │   │   │   │   ├── cleanup.scheduler.ts
+│   │   │   │   │   └── cleanup.scheduler.spec.ts
+│   │   │   │   └── cleanup.module.ts
+│   │   │   │
+│   │   │   ├── 📈 dashboard/        # Módulo do dashboard API
+│   │   │   │   ├── controllers/
+│   │   │   │   │   ├── dashboard.controller.ts
+│   │   │   │   │   └── dashboard.controller.spec.ts
+│   │   │   │   ├── services/
+│   │   │   │   │   ├── dashboard.service.ts
+│   │   │   │   │   └── dashboard.service.spec.ts
+│   │   │   │   └── dashboard.module.ts
+│   │   │   │
+│   │   │   └── 🏥 health/           # Módulo de health check
+│   │   │       ├── controllers/
+│   │   │       │   ├── health.controller.ts
+│   │   │       │   └── health.controller.spec.ts
+│   │   │       ├── services/
+│   │   │       │   ├── health.service.ts
+│   │   │       │   └── health.service.spec.ts
+│   │   │       └── health.module.ts
 │   │   │
-│   │   ├── 🧹 cleanup/              # Módulo de limpeza
-│   │   │   ├── services/
-│   │   │   │   ├── cleanup.service.ts
-│   │   │   │   └── cleanup.service.spec.ts
-│   │   │   ├── schedulers/
-│   │   │   │   ├── cleanup.scheduler.ts
-│   │   │   │   └── cleanup.scheduler.spec.ts
-│   │   │   └── cleanup.module.ts
+│   │   ├── 🏗️ infrastructure/       # Camada de infraestrutura
+│   │   │   ├── database/
+│   │   │   │   ├── database.module.ts
+│   │   │   │   ├── typeorm.config.ts
+│   │   │   │   └── database.service.ts
+│   │   │   ├── queue/
+│   │   │   │   ├── rabbitmq.module.ts
+│   │   │   │   └── rabbitmq.service.ts
+│   │   │   └── logging/
+│   │   │       ├── logger.service.ts
+│   │   │       └── logger.service.spec.ts
 │   │   │
-│   │   ├── 📈 dashboard/            # Módulo do dashboard API
-│   │   │   ├── controllers/
-│   │   │   │   ├── dashboard.controller.ts
-│   │   │   │   └── dashboard.controller.spec.ts
-│   │   │   ├── services/
-│   │   │   │   ├── dashboard.service.ts
-│   │   │   │   └── dashboard.service.spec.ts
-│   │   │   └── dashboard.module.ts
+│   │   ├── 🔗 shared/               # Interfaces e tipos
+│   │   │   ├── interfaces/
+│   │   │   │   ├── metric-data.interface.ts
+│   │   │   │   ├── project.interface.ts
+│   │   │   │   ├── deduplication.interface.ts
+│   │   │   │   └── queue-job.interface.ts
+│   │   │   ├── types/
+│   │   │   │   ├── metric.types.ts
+│   │   │   │   └── response.types.ts
+│   │   │   └── constants/
+│   │   │       ├── app.constants.ts
+│   │   │       └── queue.constants.ts
 │   │   │
-│   │   └── 🏥 health/               # Módulo de health check
-│   │       ├── controllers/
-│   │       │   ├── health.controller.ts
-│   │       │   └── health.controller.spec.ts
-│   │       ├── services/
-│   │       │   ├── health.service.ts
-│   │       │   └── health.service.spec.ts
-│   │       └── health.module.ts
+│   │   ├── app.module.ts            # Módulo raiz
+│   │   └── main.ts                  # Ponto de entrada
 │   │
-│   ├── 🏗️ infrastructure/           # Camada de infraestrutura
-│   │   ├── database/
-│   │   │   ├── database.module.ts
-│   │   │   ├── typeorm.config.ts
-│   │   │   └── database.service.ts
-│   │   ├── queue/
-│   │   │   ├── rabbitmq.module.ts
-│   │   │   └── rabbitmq.service.ts
-│   │   └── logging/
-│   │       ├── logger.service.ts
-│   │       └── logger.service.spec.ts
-│   │
-│   ├── 🔗 shared/                   # Interfaces e tipos
-│   │   ├── interfaces/
-│   │   │   ├── metric-data.interface.ts
-│   │   │   ├── project.interface.ts
-│   │   │   ├── deduplication.interface.ts
-│   │   │   └── queue-job.interface.ts
-│   │   ├── types/
-│   │   │   ├── metric.types.ts
-│   │   │   └── response.types.ts
-│   │   └── constants/
-│   │       ├── app.constants.ts
-│   │       └── queue.constants.ts
-│   │
-│   ├── app.module.ts                # Módulo raiz
-│   └── main.ts                      # Ponto de entrada
-│
-├── 📜 scripts/                      # Scripts utilitários
-│   ├── setup.sh                     # Setup inicial
-│   ├── build.sh                     # Build da aplicação
-│   ├── start-dev.sh                 # Desenvolvimento
-│   └── deploy.sh                    # Deploy
+│   ├── 📋 Configurações do Backend
+│   ├── .env                         # Variáveis específicas do backend
+│   ├── .env.example                 # Exemplo de variáveis do backend
+│   ├── .gitignore                   # Ignorados específicos do backend
+│   ├── package.json                 # Dependências Node.js do backend
+│   ├── tsconfig.json                # TypeScript do backend
+│   ├── jest.config.js               # Testes do backend
+│   ├── eslint.config.js             # Linting do backend
+│   ├── prettier.config.js           # Formatação do backend
+│   ├── nest-cli.json                # Configuração NestJS
+│   └── README.md                    # Documentação específica do backend
 │
 ├── 📋 Arquivos de configuração
 ├── .env                             # Variáveis de ambiente (não commitado)
