@@ -1,6 +1,8 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { Project } from './project.entity';
+import { Dependency } from './dependency.entity';
+import { IndentationAnalysis } from './identation-analysis.entity';
 
 @Entity('metric')
 export class Metric extends BaseEntity {
@@ -29,4 +31,10 @@ export class Metric extends BaseEntity {
 		onDelete: 'CASCADE',
 	})
 	project: Project;
+
+	@OneToMany(() => Dependency, (dependency) => dependency.metric)
+	dependencies: Dependency[];
+
+	@OneToMany(() => IndentationAnalysis, (analysis) => analysis.metric)
+	indentationAnalysis: IndentationAnalysis[];
 }
