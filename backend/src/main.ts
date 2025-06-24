@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule, {
@@ -46,15 +47,25 @@ async function bootstrap() {
 	);
 	app.enableShutdownHooks();
 
+	const swaggerConfig = new DocumentBuilder()
+        .setTitle('Indicators API')
+        .setDescription('API documentation for the Indicators project')
+        .setVersion('1.0')
+        .build();
+	const document = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('api/docs', app, document);
+
 	const port = configService.get<number>('PORT', 3001);
 	const environment = configService.get<string>('NODE_ENV', 'development');
 
 	const appUrl = `http://localhost:${port}`;
-	console.log(`
+
+	Logger.log(`
 		🚀 Application is running on: ${appUrl}
 		🌍 Environment: ${environment}
 		📝 API Prefix: /api
 		🔖 API Version: v1
+		📚 Swagger Docs: ${appUrl}/api/docs
 	`);
 
 	await app.listen(port ?? 3001);
