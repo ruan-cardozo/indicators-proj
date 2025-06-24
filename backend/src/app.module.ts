@@ -14,18 +14,20 @@ import AppDataSource from '../database/data-source';
 		}),
 		TypeOrmModule.forRootAsync({
 			useFactory: () => ({
-				...AppDataSource.options
+				...AppDataSource.options,
 			}),
 			dataSourceFactory: async (options) => {
 				const dataSource = await new DataSource(options).initialize();
 
-				Logger.log(`Database connection established successfully with ${dataSource.options.database}`);
+				Logger.log(
+					`Database connection established successfully with ${dataSource.options.database}`,
+				);
 
 				return dataSource;
 			},
 		}),
 		MetricModule,
-		ProjectModule
+		ProjectModule,
 	],
 })
 export class AppModule {}
