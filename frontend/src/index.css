@@ -1,68 +1,72 @@
-:root {
-	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
+/* Fonte customizada - DEVE vir primeiro */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+/* Diretivas Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-a {
-	font-weight: 500;
-	color: #646cff;
-	text-decoration: inherit;
-}
-a:hover {
-	color: #535bf2;
+/* Estilos base customizados */
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply antialiased;
+  }
 }
 
-body {
-	margin: 0;
-	display: flex;
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh;
+/* Componentes customizados */
+@layer components {
+  .metric-card {
+    @apply bg-white rounded-xl shadow-lg border border-gray-100 p-4 sm:p-6 hover:shadow-xl transition-all duration-300 hover:scale-105;
+  }
+  
+  .chart-container {
+    @apply bg-gray-50 rounded-xl p-4 sm:p-6;
+  }
+  
+  .tab-button {
+    @apply flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors duration-200;
+  }
+  
+  .tab-active {
+    @apply border-blue-500 text-blue-600;
+  }
+  
+  .tab-inactive {
+    @apply border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300;
+  }
+  
+  .tag-badge {
+    @apply px-2 sm:px-3 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .dependency-tag {
+    @apply px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800;
+  }
+  
+  .native-module-tag {
+    @apply px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800;
+  }
+  
+  .project-tag {
+    @apply px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800;
+  }
+  
+  .status-active {
+    @apply px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800;
+  }
+  
+  .status-inactive {
+    @apply px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800;
+  }
 }
 
-h1 {
-	font-size: 3.2em;
-	line-height: 1.1;
-}
-
-button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
-}
-button:hover {
-	border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
-	}
-	a:hover {
-		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
-	}
+/* Responsividade customizada para charts */
+@media (max-width: 640px) {
+  .recharts-responsive-container {
+    min-width: 300px !important;
+  }
 }
