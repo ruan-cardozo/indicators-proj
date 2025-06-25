@@ -16,7 +16,14 @@ export class ProjectService {
 	public getOne(uuid: string) {
 		return this.projectRepository.findOne({
 			where: { id: uuid },
-			relations: ['metrics', 'metricHashes'],
+			relations: [
+			'metrics',
+            'metrics.dependencies',
+            'metrics.indentationAnalysis',
+            'metrics.indentationAnalysis.files',
+            'metrics.indentationAnalysis.files.distributions',
+            'metricHashes',
+			],
 		});
 	}
 
