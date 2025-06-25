@@ -5,10 +5,10 @@ import { MetricHash } from './metric-hash.entity';
 
 @Entity('project')
 export class Project extends BaseEntity {
-	@Column()
+	@Column({ nullable: true })
 	name: string;
 
-	@Column()
+	@Column({ nullable: true })
 	description: string;
 
 	@Column({ type: 'timestamp with time zone' })
@@ -17,7 +17,7 @@ export class Project extends BaseEntity {
 	@Column({ default: true })
 	is_active: boolean;
 
-	@Column()
+	@Column({ type: 'varchar', length: 255, nullable: true })
 	repository_url: string;
 
 	@Column({ type: 'jsonb', nullable: true })

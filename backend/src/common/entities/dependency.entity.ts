@@ -1,27 +1,27 @@
-import { Column, Entity, OneToMany, ManyToOne } from 'typeorm';
-import { BaseEntity } from './base.entity';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Metric } from './metric.entity';
-import { DependencyItem } from './dependency-item.entity';
+import { BaseEntity } from './base.entity';
 
 @Entity('dependency')
 export class Dependency extends BaseEntity {
-    @Column('uuid')
-    metric_id: string;
+	@Column({ type: 'uuid' })
+	metric_id: string;
 
-    @Column()
-    name: string;
+	@ManyToOne(() => Metric, (metric) => metric.dependencies, {
+		onDelete: 'CASCADE',
+	})
+	@JoinColumn({ name: 'metric_id' })
+	metric: Metric;
 
-    @Column()
-    type: string;
+	@Column({ nullable: true })
+	name: string;
 
-    @Column({ type: 'integer' })
-    total_count: number;
+	@Column({ type: 'text', array: true, nullable: true })
+	dependencies: string[];
 
-    @ManyToOne(() => Metric, (metric) => metric.dependencies, {
-        onDelete: 'CASCADE',
-    })
-    metric: Metric;
+	@Column({ type: 'text', array: true, nullable: true })
+	native_modules: string[];
 
-    @OneToMany(() => DependencyItem, (item) => item.dependency)
-    items: DependencyItem[];
+	@Column({ type: 'int', nullable: true })
+	total_dependencies: number;
 }

@@ -1,10 +1,10 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { Project } from './project.entity';
 import { BaseEntity } from './base.entity';
 
 @Entity('metric_hash')
 export class MetricHash extends BaseEntity {
-	@Column('uuid')
+	@Column({ name: 'project_id', type: 'uuid' })
 	project_id: string;
 
 	@Column()
@@ -19,5 +19,6 @@ export class MetricHash extends BaseEntity {
 	@ManyToOne(() => Project, (project) => project.metricHashes, {
 		onDelete: 'CASCADE',
 	})
+	@JoinColumn({ name: 'project_id' })
 	project: Project;
 }

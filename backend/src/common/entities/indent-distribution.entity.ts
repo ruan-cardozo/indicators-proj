@@ -1,20 +1,21 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { IndentationFile } from './identation-file.entity';
 
 @Entity('indent_distribution')
 export class IndentDistribution extends BaseEntity {
-    @Column('uuid')
-    indentation_file_id: string;
+	@Column({ name: 'indentation_file_id', type: 'uuid' })
+	indentation_file_id: string;
 
-    @Column({ type: 'integer' })
-    level: number;
+	@ManyToOne(() => IndentationFile, (file) => file.distributions, {
+		onDelete: 'CASCADE',
+	})
+	@JoinColumn({ name: 'indentation_file_id' })
+	indentation_file: IndentationFile;
 
-    @Column({ type: 'integer' })
-    count: number;
+	@Column({ type: 'int' })
+	level: number;
 
-    @ManyToOne(() => IndentationFile, (file) => file.distributions, {
-        onDelete: 'CASCADE',
-    })
-    indentation_file: IndentationFile;
+	@Column({ type: 'int' })
+	count: number;
 }

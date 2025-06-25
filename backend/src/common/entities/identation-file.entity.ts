@@ -1,39 +1,40 @@
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { IndentDistribution } from './indent-distribution.entity';
 import { BaseEntity } from './base.entity';
 import { IndentationAnalysis } from './identation-analysis.entity';
-import { IndentDistribution } from './indent-distribution.entity';
 
 @Entity('indentation_file')
 export class IndentationFile extends BaseEntity {
-    @Column('uuid')
-    indentation_analysis_id: string;
+	@Column({ name: 'indentation_analysis_id', type: 'uuid' })
+	indentation_analysis_id: string;
 
-    @Column()
-    filename: string;
+	@ManyToOne(() => IndentationAnalysis, (analysis) => analysis.files, {
+		onDelete: 'CASCADE',
+	})
+	@JoinColumn({ name: 'indentation_analysis_id' })
+	indentation_analysis: IndentationAnalysis;
 
-    @Column()
-    file_path: string;
+	@Column()
+	filename: string;
 
-    @Column({ type: 'integer' })
-    max_indent_level: number;
+	@Column()
+	path: string;
 
-    @Column({ type: 'float' })
-    average_indent_level: number;
+	@Column({ type: 'int' })
+	max_indent_level: number;
 
-    @Column({ type: 'boolean' })
-    uses_spaces: boolean;
+	@Column({ type: 'float' })
+	average_indent_level: number;
 
-    @Column({ type: 'boolean' })
-    uses_tabs: boolean;
+	@Column({ type: 'boolean' })
+	uses_spaces: boolean;
 
-    @Column({ type: 'boolean' })
-    mixed_indentation: boolean;
+	@Column({ type: 'boolean' })
+	uses_tabs: boolean;
 
-    @ManyToOne(() => IndentationAnalysis, (analysis) => analysis.files, {
-        onDelete: 'CASCADE',
-    })
-    indentation_analysis: IndentationAnalysis;
+	@Column({ type: 'boolean' })
+	mixed_indentation: boolean;
 
-    @OneToMany(() => IndentDistribution, (distribution) => distribution.indentation_file)
-    distributions: IndentDistribution[];
+	@OneToMany(() => IndentDistribution, (dist) => dist.indentation_file)
+	distributions: IndentDistribution[];
 }
