@@ -7,14 +7,11 @@ export class MetricHash extends BaseEntity {
 	@Column({ name: 'project_id', type: 'uuid' })
 	project_id: string;
 
-	@Column()
+	@Column({type: 'varchar', length: 64, unique: true})
 	hash_value: string;
 
 	@Column({ type: 'timestamp with time zone' })
 	expires_at: Date;
-
-	@Column()
-	status: string;
 
 	@ManyToOne(() => Project, (project) => project.metricHashes, {
 		onDelete: 'CASCADE',
