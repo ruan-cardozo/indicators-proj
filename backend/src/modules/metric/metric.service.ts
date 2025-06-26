@@ -4,10 +4,12 @@ import { RabbitMQService } from '../queue/rabbitmq.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Metric } from 'src/common/entities/metric.entity';
+import { RequestWithDeduplication } from './metric.controller';
 
 export type MetricMessage = {
 	projectId: string;
 	metricData: CreateMetricDto;
+	deduplicationHash?: string;
 };
 
 @Injectable()
@@ -31,12 +33,14 @@ export class MetricService {
 		});
 	}
 
-	public async create(metricDto: CreateMetricDto, projectId: string) {
+	public async create(metricDto: CreateMetricDto, projectId: string, req: RequestWithDeduplication) {
+
 		const message = {
 			projectId,
 			metricData: {
 				...metricDto,
 			},
+			deduplicationHash: req.deduplicationHash,
 		} as MetricMessage;
 
 		await this.rabbitMQService.sendMessage('metrics_queue', message);

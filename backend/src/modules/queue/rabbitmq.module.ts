@@ -5,6 +5,8 @@ import { RabbitMQWorker } from './rabbitmq.worker';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Metric } from 'src/common/entities/metric.entity';
 import { Project } from 'src/common/entities/project.entity';
+import { DeduplicationService } from '../deduplication/deduplication.service';
+import { DeduplicationModule } from '../deduplication/deduplication.module';
 
 @Module({
 	imports: [
@@ -22,6 +24,7 @@ import { Project } from 'src/common/entities/project.entity';
 				},
 			},
 		]),
+		DeduplicationModule
 	],
 	controllers: [RabbitMQWorker],
 	providers: [RabbitMQService, RabbitMQWorker],
