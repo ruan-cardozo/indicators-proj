@@ -7,6 +7,7 @@ import { DataSource } from 'typeorm';
 import AppDataSource from '../database/data-source';
 import { CleanupModule } from './modules/cleanup/cleanup.module';
 import { RabbitMQModule } from './modules/queue/rabbitmq.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
 	imports: [
@@ -14,6 +15,7 @@ import { RabbitMQModule } from './modules/queue/rabbitmq.module';
 			isGlobal: true,
 			envFilePath: '.env',
 		}),
+		ScheduleModule.forRoot(),
 		TypeOrmModule.forRootAsync({
 			useFactory: () => ({
 				...AppDataSource.options,
