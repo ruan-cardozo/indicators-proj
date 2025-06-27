@@ -5,6 +5,8 @@ import { ProjectModule } from './modules/project/project.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import AppDataSource from '../database/data-source';
+import { CleanupModule } from './modules/cleanup/cleanup.module';
+import { RabbitMQModule } from './modules/queue/rabbitmq.module';
 
 @Module({
 	imports: [
@@ -28,6 +30,8 @@ import AppDataSource from '../database/data-source';
 		}),
 		MetricModule,
 		ProjectModule,
+		CleanupModule,
+		RabbitMQModule
 	],
 })
 export class AppModule {}
