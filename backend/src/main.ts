@@ -92,13 +92,13 @@ async function bootstrap() {
 
 		try {
 
-			Logger.log('🌱 Populando banco de dados...');
+			Logger.log('Populando banco de dados...');
 
 			const populatorService = app.get(DatabasePopulatorService);
 
 			await populatorService.populateDatabase();
 
-			Logger.log('✅ Banco de dados populado com sucesso!');
+			Logger.log('Banco de dados populado com sucesso!');
 		} catch (error) {
 
 			Logger.error('Erro ao popular banco de dados: ', error);

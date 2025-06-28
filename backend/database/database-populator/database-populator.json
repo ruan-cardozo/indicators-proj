@@ -1,331 +1,567 @@
 {
-  "projects": [
-    {
-      "name": "NODE-NEWRELIC",
-      "description": "Application Performance Monitoring (APM) agent for Node.js applications",
-      "repository_url": "https://github.com/newrelic/node-newrelic",
-      "is_active": true,
-      "metadata": {
-        "language": "TypeScript",
-        "framework": "NestJS",
-        "team": "Backend Team",
-        "tags": ["api", "metrics", "monitoring", "apm"]
-      },
-      "metrics": [
-        {
-          "recorded_at": "2024-06-27T10:00:00Z",
-          "lines": 15420,
-          "functions": 342,
-          "classes": 89,
-          "comments": 2180,
-          "comment_percentage": "14.1%",
-          "dependencies": {
-            "dependencies": ["express", "lodash", "axios", "winston", "joi", "@nestjs/core", "@nestjs/common", "typeorm"],
-            "native_modules": ["fs", "path", "crypto", "os", "util"],
-            "total_dependencies": 13
-          },
-          "indentation": {
-            "directory": "/src",
-            "files": [
-              {
-                "filename": "index.ts",
-                "path": "/src/index.ts",
-                "stats": {
-                  "maxIndentLevel": 6,
-                  "averageIndentLevel": 2.3,
-                  "indentDistribution": [
-                    { "level": 0, "count": 45 },
-                    { "level": 1, "count": 32 },
-                    { "level": 2, "count": 28 },
-                    { "level": 3, "count": 15 },
-                    { "level": 4, "count": 8 },
-                    { "level": 5, "count": 3 },
-                    { "level": 6, "count": 1 }
-                  ],
-                  "usesSpaces": true,
-                  "usesTabs": false,
-                  "mixedIndentation": false
-                }
-              }
-            ]
-          }
-        },
-        {
-          "recorded_at": "2024-06-26T10:00:00Z",
-          "lines": 15200,
-          "functions": 338,
-          "classes": 87,
-          "comments": 2150,
-          "comment_percentage": "14.1%",
-          "dependencies": {
-            "dependencies": ["express", "lodash", "axios", "winston", "joi", "@nestjs/core", "@nestjs/common"],
-            "native_modules": ["fs", "path", "crypto", "os"],
-            "total_dependencies": 11
-          },
-          "indentation": {
-            "directory": "/src",
-            "files": []
-          }
-        }
-      ]
-    },
-    {
-      "name": "E-COMMERCE-API",
-      "description": "RESTful API for e-commerce platform with advanced features",
-      "repository_url": "https://github.com/company/ecommerce-api",
-      "is_active": true,
-      "metadata": {
-        "language": "JavaScript",
-        "framework": "Express",
-        "team": "Backend Team",
-        "tags": ["api", "ecommerce", "rest", "database", "mongodb"]
-      },
-      "metrics": [
-        {
-          "recorded_at": "2024-06-27T10:00:00Z",
-          "lines": 8920,
-          "functions": 198,
-          "classes": 45,
-          "comments": 1245,
-          "comment_percentage": "14.0%",
-          "dependencies": {
-            "dependencies": ["express", "mongoose", "bcrypt", "jsonwebtoken", "cors", "helmet", "dotenv", "validator"],
-            "native_modules": ["crypto", "path", "fs"],
-            "total_dependencies": 11
-          },
-          "indentation": {
-            "directory": "/src",
-            "files": [
-              {
-                "filename": "app.js",
-                "path": "/src/app.js",
-                "stats": {
-                  "maxIndentLevel": 4,
-                  "averageIndentLevel": 1.8,
-                  "indentDistribution": [
-                    { "level": 0, "count": 62 },
-                    { "level": 1, "count": 45 },
-                    { "level": 2, "count": 38 },
-                    { "level": 3, "count": 22 },
-                    { "level": 4, "count": 12 }
-                  ],
-                  "usesSpaces": true,
-                  "usesTabs": false,
-                  "mixedIndentation": false
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "REACT-DASHBOARD",
-      "description": "Modern dashboard built with React and TypeScript",
-      "repository_url": "https://github.com/company/react-dashboard",
-      "is_active": true,
-      "metadata": {
-        "language": "TypeScript",
-        "framework": "React",
-        "team": "Frontend Team",
-        "tags": ["frontend", "dashboard", "react", "typescript", "ui"]
-      },
-      "metrics": [
-        {
-          "recorded_at": "2024-06-27T10:00:00Z",
-          "lines": 12560,
-          "functions": 234,
-          "classes": 67,
-          "comments": 1890,
-          "comment_percentage": "15.0%",
-          "dependencies": {
-            "dependencies": ["react", "react-dom", "typescript", "recharts", "lucide-react", "tailwindcss", "axios", "react-router-dom"],
-            "native_modules": [],
-            "total_dependencies": 8
-          },
-          "indentation": {
-            "directory": "/src",
-            "files": [
-              {
-                "filename": "App.tsx",
-                "path": "/src/App.tsx",
-                "stats": {
-                  "maxIndentLevel": 8,
-                  "averageIndentLevel": 3.2,
-                  "indentDistribution": [
-                    { "level": 0, "count": 28 },
-                    { "level": 1, "count": 35 },
-                    { "level": 2, "count": 42 },
-                    { "level": 3, "count": 38 },
-                    { "level": 4, "count": 25 },
-                    { "level": 5, "count": 18 },
-                    { "level": 6, "count": 12 },
-                    { "level": 7, "count": 6 },
-                    { "level": 8, "count": 2 }
-                  ],
-                  "usesSpaces": true,
-                  "usesTabs": false,
-                  "mixedIndentation": false
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "MICROSERVICE-AUTH",
-      "description": "Authentication and authorization microservice",
-      "repository_url": "https://github.com/company/microservice-auth",
-      "is_active": true,
-      "metadata": {
-        "language": "TypeScript",
-        "framework": "NestJS",
-        "team": "Backend Team",
-        "tags": ["microservice", "auth", "jwt", "security"]
-      },
-      "metrics": [
-        {
-          "recorded_at": "2024-06-27T10:00:00Z",
-          "lines": 6780,
-          "functions": 156,
-          "classes": 42,
-          "comments": 945,
-          "comment_percentage": "13.9%",
-          "dependencies": {
-            "dependencies": ["@nestjs/core", "@nestjs/common", "@nestjs/jwt", "passport", "passport-jwt", "bcrypt", "class-validator"],
-            "native_modules": ["crypto", "util"],
-            "total_dependencies": 9
-          },
-          "indentation": {
-            "directory": "/src",
-            "files": [
-              {
-                "filename": "auth.service.ts",
-                "path": "/src/auth/auth.service.ts",
-                "stats": {
-                  "maxIndentLevel": 5,
-                  "averageIndentLevel": 2.1,
-                  "indentDistribution": [
-                    { "level": 0, "count": 38 },
-                    { "level": 1, "count": 29 },
-                    { "level": 2, "count": 24 },
-                    { "level": 3, "count": 18 },
-                    { "level": 4, "count": 9 },
-                    { "level": 5, "count": 4 }
-                  ],
-                  "usesSpaces": true,
-                  "usesTabs": false,
-                  "mixedIndentation": false
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "LEGACY-SYSTEM",
-      "description": "Legacy system maintenance and migration",
-      "repository_url": "https://github.com/company/legacy-system",
-      "is_active": false,
-      "metadata": {
-        "language": "JavaScript",
-        "framework": "Express",
-        "team": "Maintenance Team",
-        "tags": ["legacy", "maintenance", "migration"]
-      },
-      "metrics": [
-        {
-          "recorded_at": "2024-06-15T10:00:00Z",
-          "lines": 25890,
-          "functions": 456,
-          "classes": 78,
-          "comments": 1245,
-          "comment_percentage": "4.8%",
-          "dependencies": {
-            "dependencies": ["express", "lodash", "moment", "mysql", "body-parser", "cookie-parser"],
-            "native_modules": ["fs", "path", "http", "crypto"],
-            "total_dependencies": 10
-          },
-          "indentation": {
-            "directory": "/src",
-            "files": [
-              {
-                "filename": "server.js",
-                "path": "/src/server.js",
-                "stats": {
-                  "maxIndentLevel": 7,
-                  "averageIndentLevel": 2.8,
-                  "indentDistribution": [
-                    { "level": 0, "count": 85 },
-                    { "level": 1, "count": 72 },
-                    { "level": 2, "count": 58 },
-                    { "level": 3, "count": 45 },
-                    { "level": 4, "count": 32 },
-                    { "level": 5, "count": 18 },
-                    { "level": 6, "count": 8 },
-                    { "level": 7, "count": 3 }
-                  ],
-                  "usesSpaces": false,
-                  "usesTabs": true,
-                  "mixedIndentation": true
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "MOBILE-API",
-      "description": "Backend API for mobile applications",
-      "repository_url": "https://github.com/company/mobile-api",
-      "is_active": true,
-      "metadata": {
-        "language": "TypeScript",
-        "framework": "Fastify",
-        "team": "Mobile Team",
-        "tags": ["mobile", "api", "fastify", "performance"]
-      },
-      "metrics": [
-        {
-          "recorded_at": "2024-06-27T10:00:00Z",
-          "lines": 9540,
-          "functions": 187,
-          "classes": 53,
-          "comments": 1432,
-          "comment_percentage": "15.0%",
-          "dependencies": {
-            "dependencies": ["fastify", "@fastify/cors", "@fastify/jwt", "prisma", "@prisma/client", "zod", "bcrypt"],
-            "native_modules": ["crypto", "fs", "path"],
-            "total_dependencies": 10
-          },
-          "indentation": {
-            "directory": "/src",
-            "files": [
-              {
-                "filename": "server.ts",
-                "path": "/src/server.ts",
-                "stats": {
-                  "maxIndentLevel": 4,
-                  "averageIndentLevel": 1.9,
-                  "indentDistribution": [
-                    { "level": 0, "count": 52 },
-                    { "level": 1, "count": 41 },
-                    { "level": 2, "count": 33 },
-                    { "level": 3, "count": 19 },
-                    { "level": 4, "count": 8 }
-                  ],
-                  "usesSpaces": true,
-                  "usesTabs": false,
-                  "mixedIndentation": false
-                }
-              }
-            ]
-          }
-        }
-      ]
-    }
-  ]
+	"projects": [
+		{
+			"name": "NODE-NEWRELIC",
+			"description": "Application Performance Monitoring (APM) agent for Node.js applications",
+			"repository_url": "https://github.com/newrelic/node-newrelic",
+			"is_active": true,
+			"metadata": {
+				"language": "TypeScript",
+				"framework": "NestJS",
+				"team": "Backend Team",
+				"tags": [
+					"api",
+					"metrics",
+					"monitoring",
+					"apm"
+				]
+			},
+			"metrics": [
+				{
+					"recorded_at": "2024-06-27T10:00:00Z",
+					"lines": 15420,
+					"functions": 342,
+					"classes": 89,
+					"comments": 2180,
+					"comment_percentage": "14.1%",
+					"dependencies": {
+						"dependencies": [
+							"express",
+							"lodash",
+							"axios",
+							"winston",
+							"joi",
+							"@nestjs/core",
+							"@nestjs/common",
+							"typeorm"
+						],
+						"native_modules": [
+							"fs",
+							"path",
+							"crypto",
+							"os",
+							"util"
+						],
+						"total_dependencies": 13
+					},
+					"indentation": {
+						"directory": "/src",
+						"files": [
+							{
+								"filename": "index.ts",
+								"path": "/src/index.ts",
+								"stats": {
+									"maxIndentLevel": 6,
+									"averageIndentLevel": 2.3,
+									"indentDistribution": [
+										{
+											"level": 0,
+											"count": 45
+										},
+										{
+											"level": 1,
+											"count": 32
+										},
+										{
+											"level": 2,
+											"count": 28
+										},
+										{
+											"level": 3,
+											"count": 15
+										},
+										{
+											"level": 4,
+											"count": 8
+										},
+										{
+											"level": 5,
+											"count": 3
+										},
+										{
+											"level": 6,
+											"count": 1
+										}
+									],
+									"usesSpaces": true,
+									"usesTabs": false,
+									"mixedIndentation": false
+								}
+							}
+						]
+					}
+				},
+				{
+					"recorded_at": "2024-06-26T10:00:00Z",
+					"lines": 15200,
+					"functions": 338,
+					"classes": 87,
+					"comments": 2150,
+					"comment_percentage": "14.1%",
+					"dependencies": {
+						"dependencies": [
+							"express",
+							"lodash",
+							"axios",
+							"winston",
+							"joi",
+							"@nestjs/core",
+							"@nestjs/common"
+						],
+						"native_modules": [
+							"fs",
+							"path",
+							"crypto",
+							"os"
+						],
+						"total_dependencies": 11
+					},
+					"indentation": {
+						"directory": "/src",
+						"files": []
+					}
+				}
+			]
+		},
+		{
+			"name": "E-COMMERCE-API",
+			"description": "RESTful API for e-commerce platform with advanced features",
+			"repository_url": "https://github.com/company/ecommerce-api",
+			"is_active": true,
+			"metadata": {
+				"language": "JavaScript",
+				"framework": "Express",
+				"team": "Backend Team",
+				"tags": [
+					"api",
+					"ecommerce",
+					"rest",
+					"database",
+					"mongodb"
+				]
+			},
+			"metrics": [
+				{
+					"recorded_at": "2024-06-27T10:00:00Z",
+					"lines": 8920,
+					"functions": 198,
+					"classes": 45,
+					"comments": 1245,
+					"comment_percentage": "14.0%",
+					"dependencies": {
+						"dependencies": [
+							"express",
+							"mongoose",
+							"bcrypt",
+							"jsonwebtoken",
+							"cors",
+							"helmet",
+							"dotenv",
+							"validator"
+						],
+						"native_modules": [
+							"crypto",
+							"path",
+							"fs"
+						],
+						"total_dependencies": 11
+					},
+					"indentation": {
+						"directory": "/src",
+						"files": [
+							{
+								"filename": "app.js",
+								"path": "/src/app.js",
+								"stats": {
+									"maxIndentLevel": 4,
+									"averageIndentLevel": 1.8,
+									"indentDistribution": [
+										{
+											"level": 0,
+											"count": 62
+										},
+										{
+											"level": 1,
+											"count": 45
+										},
+										{
+											"level": 2,
+											"count": 38
+										},
+										{
+											"level": 3,
+											"count": 22
+										},
+										{
+											"level": 4,
+											"count": 12
+										}
+									],
+									"usesSpaces": true,
+									"usesTabs": false,
+									"mixedIndentation": false
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "REACT-DASHBOARD",
+			"description": "Modern dashboard built with React and TypeScript",
+			"repository_url": "https://github.com/company/react-dashboard",
+			"is_active": true,
+			"metadata": {
+				"language": "TypeScript",
+				"framework": "React",
+				"team": "Frontend Team",
+				"tags": [
+					"frontend",
+					"dashboard",
+					"react",
+					"typescript",
+					"ui"
+				]
+			},
+			"metrics": [
+				{
+					"recorded_at": "2024-06-27T10:00:00Z",
+					"lines": 12560,
+					"functions": 234,
+					"classes": 67,
+					"comments": 1890,
+					"comment_percentage": "15.0%",
+					"dependencies": {
+						"dependencies": [
+							"react",
+							"react-dom",
+							"typescript",
+							"recharts",
+							"lucide-react",
+							"tailwindcss",
+							"axios",
+							"react-router-dom"
+						],
+						"native_modules": [],
+						"total_dependencies": 8
+					},
+					"indentation": {
+						"directory": "/src",
+						"files": [
+							{
+								"filename": "App.tsx",
+								"path": "/src/App.tsx",
+								"stats": {
+									"maxIndentLevel": 8,
+									"averageIndentLevel": 3.2,
+									"indentDistribution": [
+										{
+											"level": 0,
+											"count": 28
+										},
+										{
+											"level": 1,
+											"count": 35
+										},
+										{
+											"level": 2,
+											"count": 42
+										},
+										{
+											"level": 3,
+											"count": 38
+										},
+										{
+											"level": 4,
+											"count": 25
+										},
+										{
+											"level": 5,
+											"count": 18
+										},
+										{
+											"level": 6,
+											"count": 12
+										},
+										{
+											"level": 7,
+											"count": 6
+										},
+										{
+											"level": 8,
+											"count": 2
+										}
+									],
+									"usesSpaces": true,
+									"usesTabs": false,
+									"mixedIndentation": false
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "MICROSERVICE-AUTH",
+			"description": "Authentication and authorization microservice",
+			"repository_url": "https://github.com/company/microservice-auth",
+			"is_active": true,
+			"metadata": {
+				"language": "TypeScript",
+				"framework": "NestJS",
+				"team": "Backend Team",
+				"tags": [
+					"microservice",
+					"auth",
+					"jwt",
+					"security"
+				]
+			},
+			"metrics": [
+				{
+					"recorded_at": "2024-06-27T10:00:00Z",
+					"lines": 6780,
+					"functions": 156,
+					"classes": 42,
+					"comments": 945,
+					"comment_percentage": "13.9%",
+					"dependencies": {
+						"dependencies": [
+							"@nestjs/core",
+							"@nestjs/common",
+							"@nestjs/jwt",
+							"passport",
+							"passport-jwt",
+							"bcrypt",
+							"class-validator"
+						],
+						"native_modules": [
+							"crypto",
+							"util"
+						],
+						"total_dependencies": 9
+					},
+					"indentation": {
+						"directory": "/src",
+						"files": [
+							{
+								"filename": "auth.service.ts",
+								"path": "/src/auth/auth.service.ts",
+								"stats": {
+									"maxIndentLevel": 5,
+									"averageIndentLevel": 2.1,
+									"indentDistribution": [
+										{
+											"level": 0,
+											"count": 38
+										},
+										{
+											"level": 1,
+											"count": 29
+										},
+										{
+											"level": 2,
+											"count": 24
+										},
+										{
+											"level": 3,
+											"count": 18
+										},
+										{
+											"level": 4,
+											"count": 9
+										},
+										{
+											"level": 5,
+											"count": 4
+										}
+									],
+									"usesSpaces": true,
+									"usesTabs": false,
+									"mixedIndentation": false
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "LEGACY-SYSTEM",
+			"description": "Legacy system maintenance and migration",
+			"repository_url": "https://github.com/company/legacy-system",
+			"is_active": false,
+			"metadata": {
+				"language": "JavaScript",
+				"framework": "Express",
+				"team": "Maintenance Team",
+				"tags": [
+					"legacy",
+					"maintenance",
+					"migration"
+				]
+			},
+			"metrics": [
+				{
+					"recorded_at": "2024-06-15T10:00:00Z",
+					"lines": 25890,
+					"functions": 456,
+					"classes": 78,
+					"comments": 1245,
+					"comment_percentage": "4.8%",
+					"dependencies": {
+						"dependencies": [
+							"express",
+							"lodash",
+							"moment",
+							"mysql",
+							"body-parser",
+							"cookie-parser"
+						],
+						"native_modules": [
+							"fs",
+							"path",
+							"http",
+							"crypto"
+						],
+						"total_dependencies": 10
+					},
+					"indentation": {
+						"directory": "/src",
+						"files": [
+							{
+								"filename": "server.js",
+								"path": "/src/server.js",
+								"stats": {
+									"maxIndentLevel": 7,
+									"averageIndentLevel": 2.8,
+									"indentDistribution": [
+										{
+											"level": 0,
+											"count": 85
+										},
+										{
+											"level": 1,
+											"count": 72
+										},
+										{
+											"level": 2,
+											"count": 58
+										},
+										{
+											"level": 3,
+											"count": 45
+										},
+										{
+											"level": 4,
+											"count": 32
+										},
+										{
+											"level": 5,
+											"count": 18
+										},
+										{
+											"level": 6,
+											"count": 8
+										},
+										{
+											"level": 7,
+											"count": 3
+										}
+									],
+									"usesSpaces": false,
+									"usesTabs": true,
+									"mixedIndentation": true
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "MOBILE-API",
+			"description": "Backend API for mobile applications",
+			"repository_url": "https://github.com/company/mobile-api",
+			"is_active": true,
+			"metadata": {
+				"language": "TypeScript",
+				"framework": "Fastify",
+				"team": "Mobile Team",
+				"tags": [
+					"mobile",
+					"api",
+					"fastify",
+					"performance"
+				]
+			},
+			"metrics": [
+				{
+					"recorded_at": "2024-06-27T10:00:00Z",
+					"lines": 9540,
+					"functions": 187,
+					"classes": 53,
+					"comments": 1432,
+					"comment_percentage": "15.0%",
+					"dependencies": {
+						"dependencies": [
+							"fastify",
+							"@fastify/cors",
+							"@fastify/jwt",
+							"prisma",
+							"@prisma/client",
+							"zod",
+							"bcrypt"
+						],
+						"native_modules": [
+							"crypto",
+							"fs",
+							"path"
+						],
+						"total_dependencies": 10
+					},
+					"indentation": {
+						"directory": "/src",
+						"files": [
+							{
+								"filename": "server.ts",
+								"path": "/src/server.ts",
+								"stats": {
+									"maxIndentLevel": 4,
+									"averageIndentLevel": 1.9,
+									"indentDistribution": [
+										{
+											"level": 0,
+											"count": 52
+										},
+										{
+											"level": 1,
+											"count": 41
+										},
+										{
+											"level": 2,
+											"count": 33
+										},
+										{
+											"level": 3,
+											"count": 19
+										},
+										{
+											"level": 4,
+											"count": 8
+										}
+									],
+									"usesSpaces": true,
+									"usesTabs": false,
+									"mixedIndentation": false
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	]
 }
