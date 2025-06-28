@@ -8,6 +8,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { json, urlencoded } from 'express';
+import { DatabasePopulatorService } from '../database/database-populator/database-populator.service';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule, {
@@ -86,6 +87,23 @@ async function bootstrap() {
 
 	app.use(json({ limit: '50mb' }));
 	app.use(urlencoded({ limit: '50mb', extended: true }));
+
+	if (process.env.POPULATE_DATABASE === 'true') {
+
+		try {
+
+			Logger.log('🌱 Populando banco de dados...');
+
+			const populatorService = app.get(DatabasePopulatorService);
+
+			await populatorService.populateDatabase();
+
+			Logger.log('✅ Banco de dados populado com sucesso!');
+		} catch (error) {
+
+			Logger.error('Erro ao popular banco de dados: ', error);
+		}
+	}
 
 	await app.listen(port ?? 3001);
 	await app.startAllMicroservices();

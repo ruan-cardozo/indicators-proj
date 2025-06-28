@@ -8,6 +8,7 @@ import AppDataSource from '../database/data-source';
 import { CleanupModule } from './modules/cleanup/cleanup.module';
 import { RabbitMQModule } from './modules/queue/rabbitmq.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { DatabasePopulatorModule } from '../database/database-populator/database-populator.module';
 
 @Module({
 	imports: [
@@ -33,7 +34,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 		MetricModule,
 		ProjectModule,
 		CleanupModule,
-		RabbitMQModule
+		RabbitMQModule,
+		DatabasePopulatorModule
 	],
 })
 export class AppModule {}
