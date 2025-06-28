@@ -30,7 +30,14 @@ export class ProjectService {
 	public getAll() {
 		return this.projectRepository.find({
 			relationLoadStrategy: 'query',
-			relations: ['metrics', 'metricHashes'],
+			relations: [
+				'metrics',
+				'metrics.dependencies',
+				'metrics.indentationAnalysis',
+				'metrics.indentationAnalysis.files',
+				'metrics.indentationAnalysis.files.distributions',
+				'metricHashes'
+			],
 		});
 	}
 
