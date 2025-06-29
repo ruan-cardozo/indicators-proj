@@ -5,8 +5,8 @@ import { Project } from "src/common/entities/project.entity";
 import { Dependency } from "src/common/entities/dependency.entity";
 import { IndentationAnalysis } from "src/common/entities/identation-analysis.entity";
 import { Repository } from "typeorm";
-import path from "path";
-import fs from "fs";
+import * as path from "path";
+import * as fs from "fs";
 
 @Injectable()
 export class DatabasePopulatorService {
@@ -48,23 +48,9 @@ export class DatabasePopulatorService {
 	private loadSeedData() {
 		try {
 
-			const jsonPath = path.join(__dirname, 'database-populator.json');
+			const jsonPath = path.join(process.cwd(), 'database', 'database-populator', 'database-populator.json');
 
 			this.logger.log(`Tentando carregar arquivo: ${jsonPath}`);
-
-			if (!fs.existsSync(jsonPath)) {
-				this.logger.error(`Arquivo não encontrado: ${jsonPath}`);
-
-				const alternativePath = path.join(process.cwd(), 'database', 'database-populator', 'database-populator.json');
-				this.logger.log(`Tentando caminho alternativo: ${alternativePath}`);
-
-				if (!fs.existsSync(alternativePath)) {
-					throw new Error(`Arquivo JSON não encontrado em nenhum dos caminhos testados`);
-				}
-
-				const jsonData = fs.readFileSync(alternativePath, 'utf8');
-				return JSON.parse(jsonData);
-			}
 
 			const jsonData = fs.readFileSync(jsonPath, 'utf8');
 			const parsedData = JSON.parse(jsonData);
@@ -76,6 +62,7 @@ export class DatabasePopulatorService {
 		} catch (error) {
 
 			this.logger.error('Erro ao carregar arquivo JSON:', error);
+			throw error;
 		}
 	}
 
