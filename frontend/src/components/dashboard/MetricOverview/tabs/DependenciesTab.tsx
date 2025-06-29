@@ -9,7 +9,7 @@ interface DependenciesTabProps {
 
 export const DependenciesTab: React.FC<DependenciesTabProps> = ({ project }) => {
     const getLatestMetric = () => {
-        console.log({ project });
+
         return project.metrics[0] || null;
     };
 
@@ -20,7 +20,6 @@ export const DependenciesTab: React.FC<DependenciesTabProps> = ({ project }) => 
     }
 
     const deps = latestMetric.dependencies[0];
-    console.log({ aaaa: deps });
 
     const pieData = [
         { name: 'Externas', value: deps.dependencies.length, fill: CHART_COLORS[0] },
