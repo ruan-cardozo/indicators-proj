@@ -25,7 +25,11 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ project }) => {
         { name: 'Linhas', value: latestMetric.lines, fill: CHART_COLORS[0] },
         { name: 'Funções', value: latestMetric.functions, fill: CHART_COLORS[1] },
         { name: 'Classes', value: latestMetric.classes, fill: CHART_COLORS[2] },
-        { name: 'Comentários', value: latestMetric.comments, fill: CHART_COLORS[3] }
+        { name: 'Comentários', value: latestMetric.comments, fill: CHART_COLORS[3] },
+        { name: 'Métodos Públicos', value: latestMetric.public_methods || 0, fill: CHART_COLORS[4] },
+        { name: 'Métodos Privados', value: latestMetric.private_methods || 0, fill: CHART_COLORS[5] },
+        { name: 'Tamanho Médio das Funções', value: latestMetric.average_function_size || 0, fill: CHART_COLORS[6] },
+        { name: 'Total de Dependências', value: latestMetric.dependencies[0].total_dependencies, fill: CHART_COLORS[7] },
     ];
 
     return (
