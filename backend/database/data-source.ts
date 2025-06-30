@@ -16,4 +16,5 @@ export default new DataSource({
     migrations: [join(__dirname, 'migrations', '*{.ts,.js}')],
     migrationsTableName: 'migrations',
     logging: process.env.DB_LOGGING === 'true',
+    synchronize: true,
 });

@@ -29,7 +29,6 @@ export class ProjectService {
 
 	public getAll() {
 		return this.projectRepository.find({
-			relationLoadStrategy: 'query',
 			relations: [
 				'metrics',
 				'metrics.dependencies',

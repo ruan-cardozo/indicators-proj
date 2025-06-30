@@ -27,6 +27,9 @@ export class Metric extends BaseEntity {
 	@Column({ nullable: true })
 	comment_percentage: string;
 
+	@Column({ nullable: true })
+	average_function_size: string;
+
 	@ManyToOne(() => Project, (project) => project.metrics, {
 		onDelete: 'CASCADE',
 	})

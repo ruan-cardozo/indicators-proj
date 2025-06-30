@@ -21,10 +21,10 @@ const VALIDATION_CHECKS = {
         Array.isArray(analysis.files) && 
         analysis.files.length > 0,
     
-    hasIndentationStats: (file: any) => 
-        file?.stats && 
-        Array.isArray(file.stats) && 
-        file.stats.length > 0,
+    hasIndentationStats: (file: any) => {
+
+        return file?.max_indent_level !== undefined || file?.average_indent_level !== undefined;
+    },
     
     hasCommentPercentage: (metric: any) => 
         metric?.comment_percentage && 
@@ -51,9 +51,18 @@ const DATA_EXTRACTORS = {
             if (!VALIDATION_CHECKS.hasIndentationFiles(analysis)) return null;
             
             const file = analysis.files[0];
-            if (!VALIDATION_CHECKS.hasIndentationStats(file)) return null;
-            
-            return file.stats[0];
+
+            if (file.max_indent_level !== undefined || file.average_indent_level !== undefined) {
+                return {
+                    maxIndentLevel: file.max_indent_level,
+                    averageIndentLevel: file.average_indent_level,
+                    usesSpaces: file.uses_spaces,
+                    mixedIndentation: file.mixed_indentation,
+                    indentDistribution: file.distributions
+                };
+            }
+
+            return null;
         } catch (error) {
             console.warn('Erro ao extrair dados de indentação:', error);
             return null;
@@ -100,6 +109,7 @@ const QualityIndicator: React.FC<{ label: string; isGood: boolean; hasData: bool
 };
 
 export const QualityTab: React.FC<QualityTabProps> = ({ project }) => {
+
     const latestMetric = DATA_EXTRACTORS.getLatestMetric(project);
     const indentStats = latestMetric ? DATA_EXTRACTORS.getIndentationStats(latestMetric) : null;
     const basicMetrics = latestMetric ? DATA_EXTRACTORS.getBasicMetrics(latestMetric) : null;
@@ -157,37 +167,37 @@ export const QualityTab: React.FC<QualityTabProps> = ({ project }) => {
                         <div className="space-y-3">
                             <div className="flex justify-between">
                                 <span className="text-gray-600">Nível máximo:</span>
-                                <span className="font-semibold">{indentStats.maxIndentLevel ?? 'N/A'}</span>
+                                <span className="font-semibold">{indentStats?.maxIndentLevel ?? 'N/A'}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-gray-600">Nível médio:</span>
                                 <span className="font-semibold">
-                                    {indentStats.averageIndentLevel ? indentStats.averageIndentLevel.toFixed(1) : 'N/A'}
+                                    {indentStats && indentStats.averageIndentLevel ? indentStats.averageIndentLevel.toFixed(1) : 'N/A'}
                                 </span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-gray-600">Usa espaços:</span>
                                 <div className="flex items-center space-x-1">
-                                    {indentStats.usesSpaces ? (
+                                    {indentStats && indentStats.usesSpaces ? (
                                         <CheckCircle className="h-4 w-4 text-green-600" />
                                     ) : (
                                         <XCircle className="h-4 w-4 text-red-600" />
                                     )}
-                                    <span className={`font-semibold ${indentStats.usesSpaces ? 'text-green-600' : 'text-red-600'}`}>
-                                        {indentStats.usesSpaces ? 'Sim' : 'Não'}
+                                    <span className={`font-semibold ${indentStats?.usesSpaces ? 'text-green-600' : 'text-red-600'}`}>
+                                        {indentStats?.usesSpaces ? 'Sim' : 'Não'}
                                     </span>
                                 </div>
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-gray-600">Indentação mista:</span>
                                 <div className="flex items-center space-x-1">
-                                    {indentStats.mixedIndentation ? (
+                                    {indentStats?.mixedIndentation ? (
                                         <XCircle className="h-4 w-4 text-red-600" />
                                     ) : (
                                         <CheckCircle className="h-4 w-4 text-green-600" />
                                     )}
-                                    <span className={`font-semibold ${indentStats.mixedIndentation ? 'text-red-600' : 'text-green-600'}`}>
-                                        {indentStats.mixedIndentation ? 'Sim' : 'Não'}
+                                    <span className={`font-semibold ${indentStats?.mixedIndentation ? 'text-red-600' : 'text-green-600'}`}>
+                                        {indentStats?.mixedIndentation ? 'Sim' : 'Não'}
                                     </span>
                                 </div>
                             </div>
@@ -229,7 +239,7 @@ export const QualityTab: React.FC<QualityTabProps> = ({ project }) => {
                 <div className="bg-gray-50 rounded-xl p-6">
                     <h4 className="font-semibold text-gray-900 mb-4">Distribuição de Indentação</h4>
                     <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={indentStats.indentDistribution}>
+                        <BarChart data={indentStats?.indentDistribution}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="level" />
                             <YAxis />

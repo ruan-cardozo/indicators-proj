@@ -124,6 +124,18 @@ export class CreateMetricDto {
 	@Min(0)
 	comments: number;
 
+	@ApiProperty({ example: '50.51', description: 'Average function size as a string' })
+	@IsString()
+	average_function_size: string;
+
+	@ApiProperty({ example: 5 })
+	@IsInt()
+	private_methods: number
+
+	@ApiProperty({ example: 10 })
+	@IsInt()
+	public_methods: number;
+
 	@ApiProperty({ example: '15.5%' })
 	@IsString()
 	@Transform(({ value }) => {

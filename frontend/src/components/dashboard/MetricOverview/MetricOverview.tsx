@@ -1,12 +1,13 @@
 import React from 'react';
-import { FileText, TrendingUp, Package, Settings, GitBranch } from 'lucide-react';
+import { FileText, TrendingUp, Package, Settings, GitBranch, Copy, Check } from 'lucide-react';
 import { OverviewTab } from './tabs/OverviewTab';
 import { TrendsTab } from './tabs/TrendsTab';
 import { DependenciesTab } from './tabs/DependenciesTab';
 import { QualityTab } from './tabs/QualityTab';
 import type { Project } from '../../../types/project.types';
+import { CreateProjectTab } from '../ProjectCreation/ProjectCreation';
 
-type TabType = 'overview' | 'trends' | 'dependencies' | 'quality';
+type TabType = 'project-creation' | 'overview' | 'trends' | 'dependencies' | 'quality';
 
 interface MetricsOverviewProps {
 	project: Project;
@@ -19,12 +20,25 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({
 	activeTab,
 	onTabChange,
 }) => {
+	const [copiedId, setCopiedId] = React.useState(false);
+
 	const tabs = [
 		{ key: 'overview' as const, label: 'Visão Geral', icon: <FileText className="h-4 w-4" /> },
 		{ key: 'trends' as const, label: 'Tendências', icon: <TrendingUp className="h-4 w-4" /> },
 		{ key: 'dependencies' as const, label: 'Dependências', icon: <Package className="h-4 w-4" /> },
-		{ key: 'quality' as const, label: 'Qualidade', icon: <Settings className="h-4 w-4" /> }
+		{ key: 'quality' as const, label: 'Qualidade', icon: <Settings className="h-4 w-4" /> },
+		{ key: 'project-creation' as const, label: 'Criar Projeto', icon: <GitBranch className="h-4 w-4" /> },
 	];
+
+	const copyProjectId = async () => {
+		try {
+			await navigator.clipboard.writeText(project.id);
+			setCopiedId(true);
+			setTimeout(() => setCopiedId(false), 2000);
+		} catch (error) {
+			console.error('Failed to copy project ID:', error);
+		}
+	};
 
 	const renderTabContent = () => {
 		switch (activeTab) {
@@ -36,6 +50,8 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({
 				return <DependenciesTab project={project} />;
 			case 'quality':
 				return <QualityTab project={project} />;
+			case 'project-creation':
+				return <CreateProjectTab />;
 			default:
 				return <OverviewTab project={project} />;
 		}
@@ -54,9 +70,42 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({
 								{project.is_active ? 'Ativo' : 'Inativo'}
 							</span>
 						</div>
+
+						{/* Project ID Section - DESTACADO */}
+						<div className="bg-yellow-50 border border-yellow-200 rounded-md p-2 mb-3 max-w-xs">
+							<div className="flex items-center justify-between">
+								<div className="flex-1 min-w-0">
+									<p className="text-xs font-semibold text-yellow-700 mb-0.5">ID do Projeto:</p>
+									<code className="text-xs font-mono text-yellow-800 bg-yellow-100 px-1.5 py-0.5 rounded">
+										{project.id}
+									</code>
+								</div>
+								<button
+									onClick={copyProjectId}
+									className="ml-2 flex items-center space-x-1 px-2 py-0.5 bg-yellow-500 hover:bg-yellow-600 text-white text-xs rounded transition-colors"
+									title="Copiar ID do Projeto"
+								>
+									{copiedId ? (
+										<>
+											<Check className="h-3 w-3" />
+											<span>Copiado!</span>
+										</>
+									) : (
+										<>
+											<Copy className="h-3 w-3" />
+											<span>Copiar</span>
+										</>
+									)}
+								</button>
+							</div>
+							<p className="mt-1 text-xs text-yellow-700">
+								Use este ID para configurar a integração com o CLI.
+							</p>
+						</div>
+
 						<p className="text-gray-600 mb-4">{project.description}</p>
 						<div className="flex flex-wrap gap-2 mb-4">
-							{project.metadata.tags.map((tag, index) => (
+							{project.metadata.tags?.map((tag, index) => (
 								<span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
 									#{tag}
 								</span>

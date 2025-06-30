@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
 
 const DashboardContent: React.FC = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-    const [activeTab, setActiveTab] = useState<'overview' | 'trends' | 'dependencies' | 'quality'>('overview');
+    const [activeTab, setActiveTab] = useState<'project-creation' | 'overview' | 'trends' | 'dependencies' | 'quality'>('overview');
 
     const { data: projects = [], isLoading, error } = useProjects();
 
