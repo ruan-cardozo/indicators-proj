@@ -73,7 +73,11 @@ const DATA_EXTRACTORS = {
         lines: metric?.lines || 0,
         functions: metric?.functions || 0,
         classes: metric?.classes || 0,
-        comments: metric?.comments || 0
+        comments: metric?.comments || 0,
+        averageFunctionSize: metric?.average_function_size ? parseFloat(metric.average_function_size) : 0,
+        privateMethods: metric?.private_methods || 0,
+        publicMethods: metric?.public_methods || 0,
+        totalDependencies: metric?.dependencies[0].total_dependencies || 0
     })
 };
 
@@ -230,6 +234,24 @@ export const QualityTab: React.FC<QualityTabProps> = ({ project }) => {
                     <div className="text-center">
                         <div className="text-2xl font-bold text-orange-600">{basicMetrics?.comments}</div>
                         <p className="text-sm text-gray-600">Comentários</p>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-pink-600">{basicMetrics?.publicMethods ?? 0}</div>
+                        <p className="text-sm text-gray-600">Métodos Públicos</p>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-yellow-600">{basicMetrics?.privateMethods ?? 0}</div>
+                        <p className="text-sm text-gray-600">Métodos Privados</p>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-cyan-600">
+                            {basicMetrics?.averageFunctionSize ? basicMetrics.averageFunctionSize.toFixed(1) : 0}
+                        </div>
+                        <p className="text-sm text-gray-600">Tamanho Médio Função</p>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-red-600">{basicMetrics?.totalDependencies ?? 0}</div>
+                        <p className="text-sm text-gray-600">Total de Dependências</p>
                     </div>
                 </div>
             </div>

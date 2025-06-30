@@ -65,6 +65,30 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ project }) => {
                     color="text-orange-600"
                     subtitle={latestMetric.comment_percentage}
                 />
+                <MetricCard
+                    title="Métodos Públicos"
+                    value={formatNumber(Number(latestMetric.public_methods) || 0)}
+                    icon={<Layers className="h-6 w-6 text-cyan-600" />}
+                    color="text-cyan-600"
+                />
+                <MetricCard
+                    title="Métodos Privados"
+                    value={formatNumber(Number(latestMetric.private_methods) || 0)}
+                    icon={<Layers className="h-6 w-6 text-rose-600" />}
+                    color="text-rose-600"
+                />
+                <MetricCard
+                    title="Tamanho Médio das Funções"
+                    value={formatNumber(Number(latestMetric.average_function_size) || 0)}
+                    icon={<Code2 className="h-6 w-6 text-yellow-600" />}
+                    color="text-yellow-600"
+                />
+                <MetricCard
+                    title="Total de Dependências"
+                    value={latestMetric.dependencies[0].total_dependencies}
+                    icon={<Package className="h-6 w-6 text-gray-600" />}
+                    color="text-gray-600"
+                />
             </div>
 
             {/* Code Structure Chart */}
