@@ -42,6 +42,9 @@ export class RabbitMQWorker {
 				classes: metricData.classes,
 				comments: metricData.comments,
 				comment_percentage: metricData.comment_percentage,
+				average_function_size: metricData.average_function_size,
+				private_methods: metricData.private_methods,
+				public_methods: metricData.public_methods
 			});
 			savedMetric = await queryRunner.manager.save(metric);
 

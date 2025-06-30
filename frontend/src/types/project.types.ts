@@ -30,6 +30,9 @@ export interface IndentationDto {
 }
 
 export interface MetricDto {
+  public_methods: number;
+  private_methods: number;
+  average_function_size: string;
   recorded_at: string;
   lines: number;
   functions: number;

@@ -30,6 +30,12 @@ export class Metric extends BaseEntity {
 	@Column({ nullable: true })
 	average_function_size: string;
 
+	@Column({ type: 'integer', nullable: true })
+	private_methods: number;
+
+	@Column({ type: 'integer', nullable: true })
+	public_methods: number;
+
 	@ManyToOne(() => Project, (project) => project.metrics, {
 		onDelete: 'CASCADE',
 	})
